@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dogs are nice</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+		var xhr = new XMLHttpRequest();
+	
+		//GET
+        function listByCat(dog){
+            window.location.href = 'http://localhost:3000/listByCategory?cat=' + document.getElementById(dog).value
+        }
+
+        function listByPrice(){
+            window.location.href = 
+                'http://localhost:3000/listByPrice?min=' + 
+                document.getElementById('min').value + 
+                '&max=' +  document.getElementById('max').value;
+        }
+
+        function range() {
+            window.location.href = 'http://localhost:3000/range?num=' + document.getElementById('range').value
+        }
+		
+		//POST
+		function add() {
+            xhr.open("POST", 'http://localhost:3000/add', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            let item = {name: "", price: 0, category: ""};
+            item.name = document.getElementById('name').value;
+            item.price = document.getElementById('price').value;
+            item.category = document.getElementById('category').value;
+            xhr.send(JSON.stringify(item));
+        }
+
+		
+		//DELETE
+		function del() {
+            xhr.open("DELETE", 'http://localhost:3000/delete', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            let item = {name: ""};
+            item.name = document.getElementById('name2').value;
+            xhr.send(JSON.stringify(item));
+        }
+
+		//PUT
+        function edit() {
+            xhr.open("PUT", 'http://localhost:3000/edit', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            let item = {name: "", price: 0, category: ""};
+            item.name = document.getElementById('name3').value;
+            item.price = document.getElementById('price3').value;
+            item.category = document.getElementById('category3').value;
+            xhr.send(JSON.stringify(item));
+        }
+
+
+
+        
+    </script>
+
+    <p>All</p>
+    <a href="http://localhost:3000/list">http://localhost:3000/list</a>
+
+    <p>List by category</p>
+    Category: <input type="text" name="cat" id="cat"> <br>
+    <button type="button" onclick="listByCat('cat')">Click Me!</button> 
+
+    <p>List by price</p>
+    Min: <input type="text" name="min" id="min"> <br>
+    Max: <input type="text" name="max" id="max"> <br>
+    <button type="button" onclick="listByPrice()">Click Me!</button> 
+
+    <p>Add</p>
+    Name: <input type="text" name="name" id="name"> <br>
+    Price: <input type="text" name="price" id="price"> <br>
+    Category: <input type="text" name="category" id="category"> <br>
+    <button type="button" onclick="add()">Click Me!</button> 
+
+    <p>Delete</p>
+    Name: <input type="text" name="name2" id="name2"> <br>
+    <button type="button" onclick="del()">Click Me!</button> 
+
+    <p>Edit</p>
+    Name: <input type="text" name="name3" id="name3"> <br>
+    New Price: <input type="text" name="price3" id="price3"> <br>
+    New Category: <input type="text" name="category3" id="category3"> <br>
+    <button type="button" onclick="edit()">Click Me!</button>
+    
+    <p>List newest items</p>
+    Number of items <input type="text" name="range" id="range"> <br>
+    <button type="button" onclick="range()">Click Me!</button>
+
+	
+</body>
+
